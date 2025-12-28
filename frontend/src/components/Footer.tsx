@@ -1,8 +1,9 @@
-import { Link } from 'react-router-dom'
-import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook } from 'lucide-react'
+import { Link } from 'react-router-dom';
+import { MapPin, Linkedin, Twitter, Facebook, Info, Headphones } from 'lucide-react';
+import logo from '../assets/logo2.png';
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear();
 
   const services = [
     { name: 'Software Development', path: '/services#software-development' },
@@ -10,7 +11,7 @@ const Footer = () => {
     { name: 'Digital Marketing', path: '/services#digital-marketing' },
     { name: 'CRM Solutions', path: '/services#crm' },
     { name: 'ERP Solutions', path: '/services#erp' },
-  ]
+  ];
 
   const quickLinks = [
     { name: 'About Us', path: '/about' },
@@ -18,7 +19,7 @@ const Footer = () => {
     { name: 'Product', path: '/product' },
     { name: 'Careers', path: '/careers' },
     { name: 'Contact', path: '/contact' },
-  ]
+  ];
 
   return (
     <footer className="bg-gray-900 text-gray-300">
@@ -26,13 +27,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-accent-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">S</span>
-              </div>
-              <span className="text-2xl font-heading font-bold text-white">
-                Softvex
-              </span>
+            <div className="flex items-center">
+              <img src={logo} alt="Softvex Logo" className="h-9 sm:h-10" />
             </div>
             <p className="text-sm leading-relaxed">
               Scalable Software. Smart Solutions. Leading IT services and
@@ -114,18 +110,37 @@ const Footer = () => {
             </h3>
             <ul className="space-y-3">
               <li className="flex items-start space-x-3">
-                <Mail size={18} className="mt-1 text-primary-400" />
-                <span className="text-sm">info@softvex.com</span>
+                <Info size={18} className="mt-1 text-primary-400" />
+                <div className="text-sm">
+                  <p className="font-semibold text-white mb-0.5">
+                    General Inquiries
+                  </p>
+                  <a
+                    href="mailto:info@softvex.in"
+                    className="hover:text-primary-300 transition-colors"
+                  >
+                    info@softvex.in
+                  </a>
+                </div>
               </li>
               <li className="flex items-start space-x-3">
-                <Phone size={18} className="mt-1 text-primary-400" />
-                <span className="text-sm">+1 (555) 123-4567</span>
+                <Headphones size={18} className="mt-1 text-primary-400" />
+                <div className="text-sm">
+                  <p className="font-semibold text-white mb-0.5">Support</p>
+                  <a
+                    href="mailto:support@softvex.in"
+                    className="hover:text-primary-300 transition-colors"
+                  >
+                    support@softvex.in
+                  </a>
+                </div>
               </li>
               <li className="flex items-start space-x-3">
                 <MapPin size={18} className="mt-1 text-primary-400" />
                 <span className="text-sm">
-                  123 Tech Street,<br />
-                  Silicon Valley, CA 94000
+                  Bandra East, Mumbai,
+                  <br />
+                  Maharashtra, India
                 </span>
               </li>
             </ul>
@@ -134,20 +149,12 @@ const Footer = () => {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm">
           <p>
-            © {currentYear} Softvex. All rights reserved. |{' '}
-            <Link to="/" className="hover:text-primary-400 transition-colors">
-              Privacy Policy
-            </Link>{' '}
-            |{' '}
-            <Link to="/" className="hover:text-primary-400 transition-colors">
-              Terms of Service
-            </Link>
+            © {currentYear} Softvex. All rights reserved.
           </p>
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
-
+export default Footer;

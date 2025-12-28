@@ -5,15 +5,13 @@ dotenv.config()
 
 // Create transporter (configure based on your email provider)
 const createTransporter = () => {
-  // For Gmail, you'll need to use an App Password
-  // For other providers, adjust the configuration accordingly
   return nodemailer.createTransport({
-    host: process.env.SMTP_HOST || 'smtp.gmail.com',
-    port: parseInt(process.env.SMTP_PORT || '587'),
-    secure: false, // true for 465, false for other ports
+    host: process.env.EMAIL_HOST,
+    port: parseInt(process.env.EMAIL_PORT),
+    secure: process.env.EMAIL_SECURE === 'true', // true for 465, false for other ports
     auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
     },
   })
 }
@@ -24,8 +22,8 @@ export const sendContactEmail = async (contactData) => {
     const transporter = createTransporter()
     
     const mailOptions = {
-      from: process.env.EMAIL_FROM || 'noreply@softvex.com',
-      to: process.env.EMAIL_TO || 'info@softvex.com',
+      from: process.env.EMAIL_FROM,
+      to: process.env.EMAIL_TO,
       subject: `New Contact Form Submission - ${contactData.service || 'General Inquiry'}`,
       html: `
         <h2>New Contact Form Submission</h2>
@@ -69,8 +67,8 @@ export const sendCareersEmail = async (applicationData) => {
     const transporter = createTransporter()
     
     const mailOptions = {
-      from: process.env.EMAIL_FROM || 'noreply@softvex.com',
-      to: process.env.EMAIL_TO || 'careers@softvex.com',
+      from: process.env.EMAIL_FROM,
+      to: 'info@softvex.in',
       subject: `Job Application - ${applicationData.position}`,
       html: `
         <h2>New Job Application</h2>
@@ -117,4 +115,3 @@ export const sendCareersEmail = async (applicationData) => {
     return { success: false, error: error.message }
   }
 }
-

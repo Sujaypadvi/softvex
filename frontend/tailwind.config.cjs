@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -36,8 +36,23 @@ export default {
         heading: ['Inter', 'Poppins', 'sans-serif'],
         body: ['Roboto', 'Open Sans', 'sans-serif'],
       },
+      animation: {
+        blob: 'blob 10s infinite ease-in-out',
+      },
+      keyframes: {
+        blob: {
+          '0%': {
+            transform: 'translateY(0px) scale(1)',
+          },
+          '50%': {
+            transform: 'translateY(-25px) scale(1.05)',
+          },
+          '100%': {
+            transform: 'translateY(0px) scale(1)',
+          },
+        },
+      },
     },
   },
   plugins: [],
 }
-

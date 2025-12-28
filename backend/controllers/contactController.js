@@ -1,4 +1,5 @@
 import { sendContactEmail } from '../services/emailService.js'
+import { appendToSheet } from '../services/sheetService.js'
 
 // Store contacts (in production, use a database)
 // This is a simple in-memory store for demonstration
@@ -25,6 +26,23 @@ export const submitContact = async (req, res) => {
 
     // Send email notification (optional - won't fail if email fails)
     await sendContactEmail(contactData)
+
+    // Append to Google Sheet
+    try {
+      const sheetData = {
+        Timestamp: contactData.submittedAt,
+        Name: contactData.name,
+        Email: contactData.email,
+        Phone: contactData.phone,
+        Service: contactData.service,
+        Message: contactData.message,
+      }
+      await appendToSheet(sheetData)
+      console.log('Contact data appended to Google Sheet')
+    } catch (sheetError) {
+      console.error('Error appending to Google Sheet:', sheetError)
+      // Don't fail the user request, just log the error.
+    }
 
     res.status(200).json({
       success: true,
@@ -59,4 +77,3 @@ export const getContacts = async (req, res) => {
     })
   }
 }
-
